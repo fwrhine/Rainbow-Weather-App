@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:strings/strings.dart';
@@ -48,6 +49,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent
+          //color set to transperent or set your own color
+        )
+    );
+
     return Scaffold(
         body: Column(children: <Widget>[
       Container(
@@ -57,7 +66,7 @@ class _HomeState extends State<Home> {
               gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
-                  colors: [Colors.yellow, Colors.pink])),
+                  colors: [Color(0xFFFD5F7E), Color(0xFFB08BD7)])),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
