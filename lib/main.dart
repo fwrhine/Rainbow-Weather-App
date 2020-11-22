@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
           Container(
             height: MediaQuery.of(context).size.height / 3,
             width: MediaQuery.of(context).size.width,
-            color: Colors.red,
+            color: Color(0xFF2189b5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,10 +59,10 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    "Currently in Brisbane",
+                    "Brisbane",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w600
                     )
                   ),
