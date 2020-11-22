@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:strings/strings.dart';
 import 'dart:convert';
 
-String apiKey = "your API key here";
+String apiKey = "142286faa5bd8ccf1ae8df60bef70179";
 
 void main () => runApp(
   MaterialApp(
@@ -70,7 +71,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  temp != null ? temp.toString() + "\u00B0C" : "Loading",
+                  temp != null ? (temp.toInt().round()).toString() + "\u00B0C" : "Loading",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 40.0,
@@ -99,12 +100,12 @@ class _HomeState extends State<Home> {
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.thermometerHalf),
                     title: Text("Temperature"),
-                    trailing: Text(temp != null ? temp.toString() + "\u00B0C" : "Loading"),
+                    trailing: Text(temp != null ? (temp.toInt().round()).toString()  + "\u00B0C" : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.cloud),
                     title: Text("Weather"),
-                    trailing: Text(description != null ? description.toString() : "Loading"),
+                    trailing: Text(description != null ? description.toString().capitalizeFirstofEach : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.sun),
@@ -124,4 +125,8 @@ class _HomeState extends State<Home> {
       )
     );
   }
+}
+
+extension CapExtension on String {
+  String get capitalizeFirstofEach => this.split(" ").map((str) => capitalize(str)).join(" ");
 }
