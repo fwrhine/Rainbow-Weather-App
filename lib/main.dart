@@ -47,6 +47,12 @@ class _HomeState extends State<Home> {
     this.getWeather();
   }
 
+  Future<void> _getData() async {
+    setState(() {
+      getWeather();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -58,102 +64,109 @@ class _HomeState extends State<Home> {
     );
 
     return Scaffold(
-        body: Column(children: <Widget>[
-      Container(
-          height: MediaQuery.of(context).size.height / 3 * 2,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [Color(0xFFFD5F7E), Color(0xFFB08BD7)])),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 15.0, top: 100.0),
-                  child: Icon(Icons.cloud, color: Colors.white, size: 50.0),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Text("Brisbane",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.w400)),
-                ),
-                Text(
-                    temp != null
-                        ? (temp.toInt().round()).toString() + "\u00B0C"
-                        : "",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50.0,
-                        fontWeight: FontWeight.w400)),
-              ])),
-      Container(
-          height: MediaQuery.of(context).size.height / 3,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-              child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: ListView(
-                    children: <Widget>[
-                      ListTile(
-                        dense: true,
-                        leading: Container(
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: FaIcon(FontAwesomeIcons.thermometerHalf),
+        body: RefreshIndicator(
+          onRefresh: _getData,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(children: <Widget>[
+              Container(
+                  height: MediaQuery.of(context).size.height / 3 * 2,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [Color(0xFFFD5F7E), Color(0xFFB08BD7)])),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 15.0, top: 100.0),
+                          child: Icon(Icons.cloud, color: Colors.white, size: 50.0),
                         ),
-                        title:
-                        Text("Temperature", style: TextStyle(fontSize: 16.0)),
-                        trailing: Text(
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10.0),
+                          child: Text("Brisbane",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w400)),
+                        ),
+                        Text(
                             temp != null
                                 ? (temp.toInt().round()).toString() + "\u00B0C"
                                 : "",
-                            style: TextStyle(fontSize: 16.0)),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: FaIcon(FontAwesomeIcons.cloud),
-                        ),
-                        title: Text("Weather", style: TextStyle(fontSize: 16.0)),
-                        trailing: Text(
-                            description != null
-                                ? description.toString().capitalizeFirstofEach
-                                : "",
-                            style: TextStyle(fontSize: 16.0)),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: FaIcon(FontAwesomeIcons.sun),
-                        ),
-                        title: Text("Humidity", style: TextStyle(fontSize: 16.0)),
-                        trailing: Text(humidity != null ? humidity.toString() : "",
-                            style: TextStyle(fontSize: 16.0)),
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: FaIcon(FontAwesomeIcons.wind),
-                        ),
-                        title: Text("Wind Speed", style: TextStyle(fontSize: 16.0)),
-                        trailing: Text(
-                            windSpeed != null ? windSpeed.toString() : "",
-                            style: TextStyle(fontSize: 16.0)),
-                      )
-                    ],
-                  ))))
-    ]));
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 50.0,
+                                fontWeight: FontWeight.w400)),
+                      ])),
+              Container(
+                  height: MediaQuery.of(context).size.height / 3,
+                  width: MediaQuery.of(context).size.width,
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                      child: MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: ListView(
+                            children: <Widget>[
+                              ListTile(
+                                dense: true,
+                                leading: Container(
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: FaIcon(FontAwesomeIcons.thermometerHalf),
+                                ),
+                                title:
+                                Text("Temperature", style: TextStyle(fontSize: 16.0)),
+                                trailing: Text(
+                                    temp != null
+                                        ? (temp.toInt().round()).toString() + "\u00B0C"
+                                        : "",
+                                    style: TextStyle(fontSize: 16.0)),
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: FaIcon(FontAwesomeIcons.cloud),
+                                ),
+                                title: Text("Weather", style: TextStyle(fontSize: 16.0)),
+                                trailing: Text(
+                                    description != null
+                                        ? description.toString().capitalizeFirstofEach
+                                        : "",
+                                    style: TextStyle(fontSize: 16.0)),
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: FaIcon(FontAwesomeIcons.sun),
+                                ),
+                                title: Text("Humidity", style: TextStyle(fontSize: 16.0)),
+                                trailing: Text(humidity != null ? humidity.toString() : "",
+                                    style: TextStyle(fontSize: 16.0)),
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: FaIcon(FontAwesomeIcons.wind),
+                                ),
+                                title: Text("Wind Speed", style: TextStyle(fontSize: 16.0)),
+                                trailing: Text(
+                                    windSpeed != null ? windSpeed.toString() : "",
+                                    style: TextStyle(fontSize: 16.0)),
+                              )
+                            ],
+                          ))))
+            ])
+          )
+        )
+    );
   }
 }
 
