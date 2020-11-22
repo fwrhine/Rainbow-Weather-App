@@ -10,4 +10,5 @@ Replace the variable `apiKey` in `main.dart` with your API key from [OpenWeather
 ```
 font_awesome_flutter: ^8.10.0
 http: ^0.12.2
+strings: ^0.1.4
 ```
