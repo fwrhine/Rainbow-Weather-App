@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+String apiKey = "your API key here";
+
 void main () => runApp(
   MaterialApp(
     title: "Weather App",
@@ -26,7 +28,7 @@ class _HomeState extends State<Home> {
   var windSpeed;
 
   Future getWeather () async {
-    http.Response response = await http.get("http://api.openweathermap.org/data/2.5/weather?q=Brisbane&units=metric&appid=142286faa5bd8ccf1ae8df60bef70179");
+    http.Response response = await http.get("http://api.openweathermap.org/data/2.5/weather?q=Brisbane&units=metric&appid=" + apiKey);
     var results = jsonDecode(response.body);
     setState(() {
       this.temp = results['main']['temp'];
