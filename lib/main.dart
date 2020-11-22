@@ -96,60 +96,63 @@ class _HomeState extends State<Home> {
           height: MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width,
           child: Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: ListView(
-                children: <Widget>[
-                  ListTile(
-                    dense: true,
-                    leading: Container(
-                      width: 30,
-                      alignment: Alignment.center,
-                      child: FaIcon(FontAwesomeIcons.thermometerHalf),
-                    ),
-                    title:
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+              child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView(
+                    children: <Widget>[
+                      ListTile(
+                        dense: true,
+                        leading: Container(
+                          width: 30,
+                          alignment: Alignment.center,
+                          child: FaIcon(FontAwesomeIcons.thermometerHalf),
+                        ),
+                        title:
                         Text("Temperature", style: TextStyle(fontSize: 16.0)),
-                    trailing: Text(
-                        temp != null
-                            ? (temp.toInt().round()).toString() + "\u00B0C"
-                            : "",
-                        style: TextStyle(fontSize: 16.0)),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      width: 30,
-                      alignment: Alignment.center,
-                      child: FaIcon(FontAwesomeIcons.cloud),
-                    ),
-                    title: Text("Weather", style: TextStyle(fontSize: 16.0)),
-                    trailing: Text(
-                        description != null
-                            ? description.toString().capitalizeFirstofEach
-                            : "",
-                        style: TextStyle(fontSize: 16.0)),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      width: 30,
-                      alignment: Alignment.center,
-                      child: FaIcon(FontAwesomeIcons.sun),
-                    ),
-                    title: Text("Humidity", style: TextStyle(fontSize: 16.0)),
-                    trailing: Text(humidity != null ? humidity.toString() : "",
-                        style: TextStyle(fontSize: 16.0)),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      width: 30,
-                      alignment: Alignment.center,
-                      child: FaIcon(FontAwesomeIcons.wind),
-                    ),
-                    title: Text("Wind Speed", style: TextStyle(fontSize: 16.0)),
-                    trailing: Text(
-                        windSpeed != null ? windSpeed.toString() : "",
-                        style: TextStyle(fontSize: 16.0)),
-                  )
-                ],
-              )))
+                        trailing: Text(
+                            temp != null
+                                ? (temp.toInt().round()).toString() + "\u00B0C"
+                                : "",
+                            style: TextStyle(fontSize: 16.0)),
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 30,
+                          alignment: Alignment.center,
+                          child: FaIcon(FontAwesomeIcons.cloud),
+                        ),
+                        title: Text("Weather", style: TextStyle(fontSize: 16.0)),
+                        trailing: Text(
+                            description != null
+                                ? description.toString().capitalizeFirstofEach
+                                : "",
+                            style: TextStyle(fontSize: 16.0)),
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 30,
+                          alignment: Alignment.center,
+                          child: FaIcon(FontAwesomeIcons.sun),
+                        ),
+                        title: Text("Humidity", style: TextStyle(fontSize: 16.0)),
+                        trailing: Text(humidity != null ? humidity.toString() : "",
+                            style: TextStyle(fontSize: 16.0)),
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 30,
+                          alignment: Alignment.center,
+                          child: FaIcon(FontAwesomeIcons.wind),
+                        ),
+                        title: Text("Wind Speed", style: TextStyle(fontSize: 16.0)),
+                        trailing: Text(
+                            windSpeed != null ? windSpeed.toString() : "",
+                            style: TextStyle(fontSize: 16.0)),
+                      )
+                    ],
+                  ))))
     ]));
   }
 }
