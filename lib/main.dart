@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:strings/strings.dart';
 import 'dart:convert';
+import 'dart:math';
 
 String apiKey = "142286faa5bd8ccf1ae8df60bef70179";
 
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
   var currently;
   var humidity;
   var windSpeed;
+  var randomColor;
 
   Future getWeather() async {
     http.Response response = await http.get(
@@ -41,15 +43,32 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void getColor() {
+    var colors = [
+      [Color(0xFFFD5F7E), Color(0xFFB08BD7)],
+      [Color(0xFFFF7474), Color(0xFFFFD0A1)],
+      [Color(0xFF7EA1E6), Color(0xFF7EE1E6)],
+      [Color(0xFF7EB2E6), Color(0xFFC49AE9)],
+      [Color(0xFF64CAB1), Color(0xFFB0D87E)],
+    ];
+    final _random = new Random();
+    var randomColor = colors[_random.nextInt(colors.length)];
+    setState(() {
+      this.randomColor = randomColor;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     this.getWeather();
+    this.getColor();
   }
 
-  Future<void> _getData() async {
+  Future<void> _onRefresh() async {
     setState(() {
       getWeather();
+      getColor();
     });
   }
 
@@ -65,7 +84,7 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
         body: RefreshIndicator(
-          onRefresh: _getData,
+          onRefresh: _onRefresh,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Column(children: <Widget>[
@@ -76,7 +95,7 @@ class _HomeState extends State<Home> {
                       gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
-                          colors: [Color(0xFFFD5F7E), Color(0xFFB08BD7)])),
+                          colors: randomColor)),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
