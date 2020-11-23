@@ -2,7 +2,7 @@
 
 A simple weather app that displays the weather information of your current location.
 
-Icons and colors change according to weather condition!
+Animated icons and colors change according to weather condition!
 
 ## Running the project
 

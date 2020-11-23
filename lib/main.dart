@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:strings/strings.dart';
 import 'dart:convert';
-import 'dart:math';
+import 'weatherConditions.dart';
 
 String apiKey = "142286faa5bd8ccf1ae8df60bef70179";
 
@@ -24,16 +25,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var temp;
+  var conditionMain;
   var description;
   var currently;
   var humidity;
   var windSpeed;
   var randomColor;
   var city;
-  String unit = "metric";
 
   var longitude;
   var latitude;
+
+  var conditionCode;
+  var conditionColor;
+
+  var unit = "metric";
 
   Future getLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -60,11 +66,14 @@ class _HomeState extends State<Home> {
 
     setState(() {
       this.temp = results['main']['temp'];
+      this.conditionMain = results['weather'][0]['main'];
       this.description = results['weather'][0]['description'];
       this.currently = results['weather'][0]['main'];
       this.humidity = results['main']['humidity'];
       this.windSpeed = results['wind']['speed'];
       this.city = results['name'];
+      this.conditionCode = setConditionCode(this.conditionMain);
+      this.conditionColor = setConditionColor(this.conditionMain);
     });
   }
 
@@ -72,41 +81,22 @@ class _HomeState extends State<Home> {
     Future.wait([getLocation()]).then((FutureOr) => {getWeather()});
   }
 
-  void setColor() {
-    var colors = [
-      [Color(0xFFFD5F7E), Color(0xFFB08BD7)],
-      [Color(0xFFFF7474), Color(0xFFFFD0A1)],
-      [Color(0xFF7EA1E6), Color(0xFF7EE1E6)],
-      [Color(0xFF7EB2E6), Color(0xFFC49AE9)],
-      [Color(0xFF64CAB1), Color(0xFFB0D87E)],
-    ];
-    final _random = new Random();
-    var randomColor = colors[_random.nextInt(colors.length)];
-    setState(() {
-      this.randomColor = randomColor;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     this._getWeather();
-    this.setColor();
   }
 
   Future<void> _onRefresh() async {
     setState(() {
       this._getWeather();
-      this.setColor();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent
-            //color set to transperent or set your own color
-            ));
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     return Scaffold(
         body: RefreshIndicator(
@@ -121,16 +111,26 @@ class _HomeState extends State<Home> {
                           gradient: LinearGradient(
                               begin: Alignment.bottomLeft,
                               end: Alignment.topRight,
-                              colors: randomColor)),
+                              colors: conditionColor != null
+                                  ? conditionColor
+                                  : [Color(0xFFFFFFFF), Color(0xFFFFFFFF)])),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: 15.0, top: 100.0),
-                              child: Icon(Icons.cloud,
-                                  color: Colors.white, size: 50.0),
+                              padding: EdgeInsets.only(bottom: 7.0, top: 100.0),
+                              // child: Icon(Icons.cloud,
+                              //     color: Colors.white, size: 50.0),
+                              // child: Image.asset('assets/weather_icons/cloud.png')
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                child: FlareActor(
+                                  "assets/weather_conditions.flr",
+                                  animation: conditionCode,
+                                ),
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(bottom: 10.0),
