@@ -1,7 +1,8 @@
 # Rainbow Weather App
 
 A simple weather app that displays the weather information of your current location.
-The icons and colors change according to the weather condition!
+
+Icons and colors change according to weather condition!
 
 ## Running the project
 
