@@ -2,6 +2,8 @@
 
 A simple weather app that displays the current weather data of your location.
 
+Built with Flutter.
+
 ## Features
 - Automatically detects location
 - Background color and animated weather icon change depending on weather condition!
