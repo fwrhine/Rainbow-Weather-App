@@ -15,6 +15,11 @@ A simple weather app that displays the current weather data of your location.
 ## Running the project
 
 Replace the variable `apiKey` in `main.dart` with your API key from [OpenWeatherMap](https://openweathermap.org/).
+Then run:
+```
+flutter pub get
+flutter run
+```
 
 ## Dependencies
 ```
