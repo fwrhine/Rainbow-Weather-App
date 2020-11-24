@@ -33,6 +33,7 @@ dependencies:
   strings: ^0.1.4
   geolocator: ^6.1.7
   flare_flutter: ^2.0.6
+  toggle_switch: ^0.1.8
 
 dev_dependencies:
   flutter_launcher_icons: ^0.8.1

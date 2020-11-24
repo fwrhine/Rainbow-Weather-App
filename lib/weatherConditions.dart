@@ -3,7 +3,7 @@ import 'dart:math';
 
 String setConditionCode(String condition) {
   /* Set Flare animation code based on weather condition.*/
-  var code;
+  var code = "50d";
 
   switch (condition) {
     case "Thunderstorm":
@@ -18,9 +18,6 @@ String setConditionCode(String condition) {
     case "Snow":
       code = "13d";
       break;
-    case "Atmosphere":
-      code = "50d";
-      break;
     case "Clear":
       code = "01d";
       break;
@@ -34,7 +31,7 @@ String setConditionCode(String condition) {
 
 List<Color> setConditionColor(String condition) {
   /* Set background color based on weather condition.*/
-  var color;
+  var color = [Color(0xFF3C9CF8), Color(0xFFB0D87E)];
 
   switch (condition) {
     case "Thunderstorm":
@@ -48,9 +45,6 @@ List<Color> setConditionColor(String condition) {
       break;
     case "Snow":
       color = [Color(0xFF7EA1E6), Color(0xFF7EE1E6)];
-      break;
-    case "Atmosphere":
-      color = [Color(0xFF3C9CF8), Color(0xFFB0D87E)];
       break;
     case "Clear":
       color = [Color(0xFFFF7474), Color(0xFFFFD0A1)];
