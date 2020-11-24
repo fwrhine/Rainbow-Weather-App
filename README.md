@@ -30,4 +30,6 @@ toggle_switch: ^0.1.8
 
 ## Credits
 
-Animated weather icons by Joseph Cheng: [https://rive.app/a/josephcheng/files/flare/weather-flat-icons/preview](https://rive.app/a/josephcheng/files/flare/weather-flat-icons/preview)
+Animated weather icons by Joseph Cheng:
+
+[https://rive.app/a/josephcheng/files/flare/weather-flat-icons/preview](https://rive.app/a/josephcheng/files/flare/weather-flat-icons/preview)
