@@ -9,7 +9,8 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'dart:convert';
 import 'weatherConditions.dart';
 
-String apiKey = "142286faa5bd8ccf1ae8df60bef70179";
+// Replace string with your API key from OpenWeatherMap.
+String apiKey = "your API key here";
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -43,6 +44,8 @@ class _HomeState extends State<Home> {
   var degree = "C"; // C metric, F imperial
 
   Future getLocation() async {
+    /* Get coordinates of current location.
+    * Location permission is automatically requested.*/
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
 
@@ -74,13 +77,18 @@ class _HomeState extends State<Home> {
       this.humidity = results['main']['humidity'];
       this.windSpeed = results['wind']['speed'];
       this.city = results['name'];
+
+      // Set color and icon based on weather condition.
       this.conditionCode = setConditionCode(this.conditionMain);
       this.conditionColor = setConditionColor(this.conditionMain);
+
+      // Set degree unit depending on toggle value.
       this.degree = this.unit == 0 ? "C" : "F";
     });
   }
 
   void _getWeather() {
+    /* Wait for location coordinates before fetching weather.*/
     Future.wait([getLocation()]).then((FutureOr) => {getWeather()});
   }
 
@@ -267,6 +275,7 @@ class _HomeState extends State<Home> {
 }
 
 extension CapExtension on String {
+  /* Capitalize first letter of each word in a string.*/
   String get capitalizeFirstofEach =>
       this.split(" ").map((str) => capitalize(str)).join(" ");
 }
