@@ -10,9 +10,11 @@ Built with Flutter.
 - Toggle between Metric and Imperial unit
 
 <br>
-<img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/sf.gif" height="430" />
-<img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/glasgow.gif" height="430" />
-<img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/sermersooq.gif" height="430" />
+<p float="left">
+  <img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/sf.gif" height="430" />
+  <img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/glasgow.gif" height="430" />
+  <img src="https://gitlab.com/fwrhine/rainbow-weather-app/-/raw/master/images/sermersooq.gif" height="430" />
+</p>
 
 ## Running the project
 
